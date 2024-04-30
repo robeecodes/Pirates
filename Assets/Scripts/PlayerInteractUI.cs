@@ -9,17 +9,20 @@ public class PlayerInteractUI : MonoBehaviour
 
     private void Update() {
         if (playerInteract.GetInteractableObject() != null) {
-            Show();
+            string interactMessage = playerInteract.GetInteractableObject().GetInteractText();
+            if (interactMessage != null) {
+                Show(interactMessage);
+            }
         }
         else {
             Hide();
         }
     }
 
-    private void Show()
+    private void Show(string msg)
     {
         container.SetActive(true);
-        interactText.text = playerInteract.GetInteractableObject().GetInteractText();
+        interactText.text = msg;
     }
 
     private void Hide()

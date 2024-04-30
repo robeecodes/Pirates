@@ -108,7 +108,7 @@ CapsuleCollider:
   m_Radius: 0.49751544
   m_Height: 1.23
   m_Direction: 1
-  m_Center: {x: 0, y: -0.02, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &9120757833894054889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c162d7ef4578d941bea20f7732ba48c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnimator: {fileID: 0}
+  kickSFX: {fileID: 8300000, guid: 6c49bf99543e5e84a87b7145fe574cc3, type: 3}
 --- !u!54 &112236173509242474
 Rigidbody:
   m_ObjectHideFlags: 0
