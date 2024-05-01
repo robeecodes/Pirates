@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour {
+    [SerializeField] private PlayerInfo _playerInfo;
     private void Update() {
         if (Input.GetKeyDown(KeyCode.E)) {
             IInteractable interactable = GetInteractableObject();
@@ -28,6 +29,10 @@ public class PlayerInteract : MonoBehaviour {
             }
             else {
                 if (Vector3.Distance(transform.position, interactable.GetTransform().position) < Vector3.Distance(transform.position, closestInteractable.GetTransform().position)) {
+                    if (!(interactable is Axe && closestInteractable is PalmTree) || (!_playerInfo.hasAxe)) {
+                        closestInteractable = interactable;
+                    }
+                } else if (_playerInfo.hasAxe && closestInteractable is Axe && interactable is PalmTree) {
                     closestInteractable = interactable;
                 }
             }
