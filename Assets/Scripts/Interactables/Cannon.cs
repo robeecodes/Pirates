@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
-public class Cannon : MonoBehaviour, IInteractable {
+public class Cannon : MonoBehaviour, IInteractable, IReputable {
     [SerializeField] private ParticleSystem explosion;
     [SerializeField] private AudioClip boomSFX;
+    [SerializeField] private PlayerInfo _playerInfo;
     
     private static readonly int Shoot = Animator.StringToHash("Shoot");
 
@@ -18,6 +20,7 @@ public class Cannon : MonoBehaviour, IInteractable {
 
     public void Interact(Transform interactor, PlayerInteract player) {
         ShootCannon();
+        AlterReputation();
     }
 
     public string GetInteractText() {
@@ -26,6 +29,10 @@ public class Cannon : MonoBehaviour, IInteractable {
 
     public Transform GetTransform() {
         return transform;
+    }
+
+    public void AlterReputation() {
+        _playerInfo.reputation = (float)Math.Max(-10, _playerInfo.reputation - 0.25);
     }
 
     private void Bang() {

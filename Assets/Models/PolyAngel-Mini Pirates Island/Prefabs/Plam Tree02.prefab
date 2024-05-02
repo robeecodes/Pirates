@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3d27b567b8c3e46b1b68598eeea031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainInfo: {fileID: 0}
+  leaves: {fileID: 0}
+  _playerInfo: {fileID: 11400000, guid: 520684b725eb83746a6066f05b315279, type: 2}
   playerAnimator: {fileID: 0}
-  kickSFX: {fileID: 0}
+  chopSFX: {fileID: 0}

@@ -63,19 +63,16 @@ public class Navigation : MonoBehaviour {
         // Otherwise, _state is based on player's reputation
         if (playerInfo.hasAxe) {
             _state = State.Scared;
-        } else if (playerInfo.hasWateringCan) {
+        } else if (playerInfo.hasWateringCan && _state != State.Scared) {
             _state = State.Happy;
         }
         else {
             float rep = playerInfo.reputation;
-            if (rep <= -5) {
-                _state = State.Scared;
-            } else if (rep >= 3) {
-                _state = State.Happy;
-            }
-            else {
-                _state = State.Neutral;
-            }
+            _state = rep switch {
+                <= -5 => State.Scared,
+                >= 3 => State.Happy,
+                _ => State.Neutral
+            };
         }
     }
     

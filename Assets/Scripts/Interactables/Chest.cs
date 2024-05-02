@@ -6,6 +6,7 @@ public class Chest : MonoBehaviour, IInteractable
 {
     private Animator _chestAnimator;
     [SerializeField] private Dialogue dialogue;
+    [SerializeField] private PlayerInfo _playerInfo;
     
     private static readonly int IsOpen = Animator.StringToHash("IsOpen");
 

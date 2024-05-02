@@ -293,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 4593184484909914550, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
   boomSFX: {fileID: 8300000, guid: 1be19f456f4f6a34cb0949962714459a, type: 3}
+  _playerInfo: {fileID: 11400000, guid: 520684b725eb83746a6066f05b315279, type: 2}
 --- !u!95 &8682837339918678814
 Animator:
   serializedVersion: 5

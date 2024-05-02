@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Tavern : MonoBehaviour, IInteractable {
     [SerializeField] private LevelLoader LevelLoader;

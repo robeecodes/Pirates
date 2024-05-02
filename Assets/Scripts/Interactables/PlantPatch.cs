@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlantPatch : MonoBehaviour, IInteractable {
+public class PlantPatch : MonoBehaviour, IInteractable, IReputable {
     [SerializeField] private PlayerInfo _playerInfo;
     [SerializeField] private ParticleSystem _destruction;
     [SerializeField] private GameObject _mud;
@@ -18,9 +19,11 @@ public class PlantPatch : MonoBehaviour, IInteractable {
 
     public void Interact(Transform interactor, PlayerInteract player) {
         if (!_playerInfo.hasWateringCan) {
+            AlterReputation();
             StartCoroutine(DestroyPlants());
         }
         else if (!_watered) {
+            AlterReputation();
             Animator playerAnimator = player.GetComponent<Animator>();
             playerAnimator.SetTrigger(Watering);
             AudioSource.PlayClipAtPoint(waterSFX, transform.position,
@@ -60,5 +63,15 @@ public class PlantPatch : MonoBehaviour, IInteractable {
 
     public Transform GetTransform() {
         return transform;
+    }
+
+    public void AlterReputation() {
+        if (!_playerInfo.hasWateringCan) {
+            _playerInfo.reputation = (float)Math.Max(-10, _playerInfo.reputation - 1.5);
+        }
+
+        if (_playerInfo.hasWateringCan) {
+            _playerInfo.reputation = (float)Math.Min(10, _playerInfo.reputation + 1.5);
+        }
     }
 }

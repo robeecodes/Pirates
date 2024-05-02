@@ -35,6 +35,7 @@ public class Axe : MonoBehaviour, IInteractable {
         transform.localRotation = rotation;
         transform.localScale = scale;
         _playerInfo.hasAxe = true;
+        AlterReputation();
     }
 
     private void Drop() {
@@ -55,5 +56,9 @@ public class Axe : MonoBehaviour, IInteractable {
 
     public Transform GetTransform() {
         return transform;
+    }
+
+    public void AlterReputation() {
+        _playerInfo.reputation = Math.Max(-10, _playerInfo.reputation - 1);
     }
 }
