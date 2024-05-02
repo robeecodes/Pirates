@@ -9,7 +9,7 @@ public class LevelLoader : MonoBehaviour {
     [SerializeField] private PlayerInteract player;
     private static readonly int Property = Animator.StringToHash("End Level");
     
-    private void Awake() {
+    private void Start() {
         if (SceneManager.GetActiveScene().name == "Main" && mainInfo.isTavernExit) {
             player.transform.position = new Vector3((float)-14.80, (float)5.52, (float)-1.05);
             player.transform.rotation = Quaternion.Euler(0, (float)0, 0);

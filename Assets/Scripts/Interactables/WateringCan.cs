@@ -12,6 +12,12 @@ public class WateringCan : MonoBehaviour, IInteractable, IReputable {
     [SerializeField] private Quaternion rotation;
     [SerializeField] private GameObject hand;
 
+    private void Awake() {
+        if (_playerInfo.hasWateringCan) {
+            Pickup();
+        }
+    }
+    
     public void Interact(Transform interactor, PlayerInteract player) {
         // Pick up the can if player isn't holding anything
         if (!_playerInfo.hasAxe && !_playerInfo.hasWateringCan) {

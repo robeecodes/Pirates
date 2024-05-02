@@ -2,18 +2,19 @@ using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Navigation : MonoBehaviour {
     [SerializeField] private PlayerInfo playerInfo;
     
-    private enum State {
+    public enum State {
         Neutral,
         Happy,
         Scared
     }
 
-    private State _state;
+    public State state;
     
     private bool _seesPlayer;
     
@@ -45,7 +46,7 @@ public class Navigation : MonoBehaviour {
 
         CreateRandomDestination();
 
-        _state = State.Neutral;
+        state = State.Neutral;
     }
 
     private void Update() {
@@ -62,13 +63,13 @@ public class Navigation : MonoBehaviour {
         // Agents are scared if the player has an axe, but happy if player has watering can.
         // Otherwise, _state is based on player's reputation
         if (playerInfo.hasAxe) {
-            _state = State.Scared;
-        } else if (playerInfo.hasWateringCan && _state != State.Scared) {
-            _state = State.Happy;
+            state = State.Scared;
+        } else if (playerInfo.hasWateringCan && state != State.Scared) {
+            state = State.Happy;
         }
         else {
             float rep = playerInfo.reputation;
-            _state = rep switch {
+            state = rep switch {
                 <= -5 => State.Scared,
                 >= 3 => State.Happy,
                 _ => State.Neutral
@@ -82,7 +83,7 @@ public class Navigation : MonoBehaviour {
             _seesPlayer = true;
             _agent.destination = _agent.transform.position;
             _animator.SetFloat(AnimatorWalkSpeed, 0);
-            _animator.SetInteger(AnimatorState, (int)_state);
+            _animator.SetInteger(AnimatorState, (int)state);
         }
     }
 

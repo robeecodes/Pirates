@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour {
@@ -8,9 +10,17 @@ public class PlayerInteract : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E)) {
             IInteractable interactable = GetInteractableObject();
             if (interactable != null) {
-                interactable.Interact(transform, this);
+                StartCoroutine(Interact(interactable));
             }
         }
+    }
+
+    IEnumerator Interact(IInteractable interactable) {
+        var controller = GetComponent<ThirdPersonController>();
+        controller.enabled = false;
+        interactable.Interact(transform, this);
+        yield return new WaitForSeconds(1);
+        controller.enabled = true;
     }
 
     public IInteractable GetInteractableObject() {
@@ -25,6 +35,9 @@ public class PlayerInteract : MonoBehaviour {
 
         IInteractable closestInteractable = null;
         foreach (IInteractable interactable in interactables) {
+            if ((_playerInfo.hasAxe || _playerInfo.hasWateringCan) && interactable is Animal) {
+                continue;
+            }
             if (closestInteractable == null) {
                 closestInteractable = interactable;
             }
@@ -32,15 +45,13 @@ public class PlayerInteract : MonoBehaviour {
                 if (Vector3.Distance(transform.position, interactable.GetTransform().position) <
                     Vector3.Distance(transform.position, closestInteractable.GetTransform().position)) {
                     if ((closestInteractable is not Axe) && (closestInteractable is not WateringCan)) {
-                        if (interactable is Axe && !_playerInfo.hasAxe) {
-                            closestInteractable = interactable;
+                        switch (interactable) {
+                            case Axe when !_playerInfo.hasAxe:
+                            case WateringCan when !_playerInfo.hasWateringCan:
+                                closestInteractable = interactable;
+                                break;
                         }
-
-                        if (interactable is WateringCan && !_playerInfo.hasWateringCan) {
-                            closestInteractable = interactable;
-                        }
-                    }
-                    else {
+                    } else {
                         closestInteractable = interactable;
                     }
                 }
