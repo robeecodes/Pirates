@@ -53,6 +53,8 @@ MonoBehaviour:
   _playerInfo: {fileID: 11400000, guid: 520684b725eb83746a6066f05b315279, type: 2}
   _destruction: {fileID: 7226888052703040407, guid: 7ec363c8df426644ea85f8d6d570561c, type: 3}
   _mud: {fileID: 2516021555047628587}
+  waterSFX: {fileID: 8300000, guid: 9f3676aaac736904c959ab617dfe87e9, type: 3}
+  deathSFX: {fileID: 8300000, guid: d3de31d99def7a64e83f7f83f171eefc, type: 3}
 --- !u!65 &1434411353685844358
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -72,8 +74,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.16636, y: 0.5268812, z: 4.0967665}
-  m_Center: {x: -0.013175011, y: -0.23655939, z: -0.02334261}
+  m_Size: {x: 2.2648773, y: 0.5268812, z: 2.2670102}
+  m_Center: {x: -0.050149977, y: -0.23655939, z: -0.010375023}
 --- !u!1001 &2424279425862173017
 PrefabInstance:
   m_ObjectHideFlags: 0

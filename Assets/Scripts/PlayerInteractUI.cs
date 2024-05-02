@@ -14,6 +14,9 @@ public class PlayerInteractUI : MonoBehaviour
             if (interactMessage != null) {
                 Show(interactMessage);
             }
+            else {
+                Hide();
+            }
         }
         else {
             Hide();

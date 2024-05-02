@@ -12,7 +12,7 @@ public class WateringCan : MonoBehaviour, IInteractable {
     [SerializeField] private GameObject hand;
 
     public void Interact(Transform interactor, PlayerInteract player) {
-        // Pick up the axe if player isn't holding anything
+        // Pick up the can if player isn't holding anything
         if (!_playerInfo.hasAxe && !_playerInfo.hasWateringCan) {
             if (gameObject.GetComponent<Rigidbody>() != null) {
                 Destroy(gameObject.GetComponent<Rigidbody>());
