@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Doublsb.Dialog;
-using UnityEngine.SceneManagement;
 
 public class IntroDialogue : MonoBehaviour
 {

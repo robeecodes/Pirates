@@ -3,7 +3,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class TomatoBox : MonoBehaviour, IReputable {
-    [SerializeField] private PlayerInfo playerInfo;
     [SerializeField] private AudioClip squishSFX;
     
     private bool _triggered;
@@ -26,6 +25,6 @@ public class TomatoBox : MonoBehaviour, IReputable {
     }
 
     public void AlterReputation() {
-        playerInfo.reputation = (float)Math.Max(-10, playerInfo.reputation - 0.25);
+        InfoManager.Instance.reputation = (float)Math.Max(-10, InfoManager.Instance.reputation - 0.25);
     }
 }

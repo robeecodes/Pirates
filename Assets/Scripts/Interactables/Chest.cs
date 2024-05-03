@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Chest : MonoBehaviour, IInteractable
 {
     private Animator _chestAnimator;
     [SerializeField] private Dialogue dialogue;
-    [SerializeField] private PlayerInfo _playerInfo;
     
     private static readonly int IsOpen = Animator.StringToHash("IsOpen");
 
@@ -15,9 +12,9 @@ public class Chest : MonoBehaviour, IInteractable
     }
     private void OpenCloseChest() {
         _chestAnimator.SetBool(IsOpen, !_chestAnimator.GetBool(IsOpen));
-        if (!_playerInfo.hasOpenedChest) {
+        if (!InfoManager.Instance.hasOpenedChest) {
             dialogue.Talk();
-            _playerInfo.hasOpenedChest = true;
+            InfoManager.Instance.hasOpenedChest = true;
         }
         
     }

@@ -2,12 +2,9 @@ using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Navigation : MonoBehaviour {
-    [SerializeField] private PlayerInfo playerInfo;
-    
     public enum State {
         Neutral,
         Happy,
@@ -62,13 +59,13 @@ public class Navigation : MonoBehaviour {
 
         // Agents are scared if the player has an axe, but happy if player has watering can.
         // Otherwise, _state is based on player's reputation
-        if (playerInfo.hasAxe) {
+        if (InfoManager.Instance.hasAxe) {
             state = State.Scared;
-        } else if (playerInfo.hasWateringCan && state != State.Scared) {
+        } else if (InfoManager.Instance.hasWateringCan && state != State.Scared) {
             state = State.Happy;
         }
         else {
-            float rep = playerInfo.reputation;
+            float rep = InfoManager.Instance.reputation;
             state = rep switch {
                 <= -5 => State.Scared,
                 >= 3 => State.Happy,
@@ -79,6 +76,7 @@ public class Navigation : MonoBehaviour {
     
 
     private void OnTriggerStay(Collider other) {
+        // Agents stop moving when near the player
         if (other.gameObject.name == "PlayerArmature") {
             _seesPlayer = true;
             _agent.destination = _agent.transform.position;
@@ -88,6 +86,7 @@ public class Navigation : MonoBehaviour {
     }
 
     private void OnTriggerExit(Collider other) {
+        // Normal movement if player is not nearby
         if (other.gameObject.name == "PlayerArmature") {
             _seesPlayer = false;
             _animator.SetInteger(AnimatorState, 0);
@@ -100,6 +99,7 @@ public class Navigation : MonoBehaviour {
     }
 
     private void CreateRandomDestination() {
+        // Generate a random destination on the navmesh
         float x = Random.Range(_position.x - _bounds.extents.x, _position.x + _bounds.extents.x);
         float z = Random.Range(_position.z - _bounds.extents.z, _position.z + _bounds.extents.z);
 

@@ -4,7 +4,6 @@ using UnityEngine;
 public class Barrels : MonoBehaviour, IInteractable, IReputable {
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private AudioClip kickSFX;
-    [SerializeField] private PlayerInfo _playerInfo;
     private static readonly int Kick = Animator.StringToHash("Kick");
     private static readonly int IsSwimming = Animator.StringToHash("IsSwimming");
 
@@ -39,6 +38,6 @@ public class Barrels : MonoBehaviour, IInteractable, IReputable {
     }
     
     public void AlterReputation() {
-        _playerInfo.reputation = (float)Math.Max(-10, _playerInfo.reputation - 0.5);
+        InfoManager.Instance.reputation = (float)Math.Max(-10, InfoManager.Instance.reputation - 0.5);
     }
 }

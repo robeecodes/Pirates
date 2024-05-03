@@ -1,6 +1,3 @@
-// https://www.youtube.com/watch?v=1VXeyeLthdQ
-
-using System;
 using UnityEngine;
 
 public class AudioSwap : MonoBehaviour {

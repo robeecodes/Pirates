@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Wanderers : MonoBehaviour, IInteractable {
@@ -11,7 +9,6 @@ public class Wanderers : MonoBehaviour, IInteractable {
 
     public void Interact(Transform interactor, PlayerInteract player) {
         dialogue.Talk();
-        transform.LookAt(player.transform.position);
     }
     
     public string GetInteractText() {

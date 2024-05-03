@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WateringCan : MonoBehaviour, IInteractable, IReputable {
-    [SerializeField] private PlayerInfo _playerInfo;
     [SerializeField] private PlayerInteract _player;
     
     
@@ -13,16 +10,16 @@ public class WateringCan : MonoBehaviour, IInteractable, IReputable {
     [SerializeField] private GameObject hand;
 
     private void Awake() {
-        if (_playerInfo.hasWateringCan) {
+        if (InfoManager.Instance.hasWateringCan) {
             Pickup();
         }
     }
     
     public void Interact(Transform interactor, PlayerInteract player) {
         // Pick up the can if player isn't holding anything
-        if (!_playerInfo.hasAxe && !_playerInfo.hasWateringCan) {
+        if (!InfoManager.Instance.hasAxe && !InfoManager.Instance.hasWateringCan) {
             Pickup();
-        } else if (_playerInfo.hasWateringCan && player.GetInteractableObject() is WateringCan) {
+        } else if (InfoManager.Instance.hasWateringCan && player.GetInteractableObject() is WateringCan) {
             Drop();
         }
     }
@@ -34,21 +31,21 @@ public class WateringCan : MonoBehaviour, IInteractable, IReputable {
         transform.parent = hand.transform;
         transform.localPosition = position;
         transform.localRotation = rotation;
-        _playerInfo.hasWateringCan = true;
+        InfoManager.Instance.hasWateringCan = true;
         AlterReputation();
     }
 
     private void Drop() {
         transform.parent = null;
         gameObject.AddComponent<Rigidbody>();
-        _playerInfo.hasWateringCan = false;
+        InfoManager.Instance.hasWateringCan = false;
     }
     
     public string GetInteractText() {
-        if (!_playerInfo.hasAxe && !_playerInfo.hasWateringCan) {
+        if (!InfoManager.Instance.hasAxe && !InfoManager.Instance.hasWateringCan) {
             return "Pick up Watering Can";
         }
-        if (_playerInfo.hasWateringCan && _player.GetInteractableObject() is WateringCan) {
+        if (InfoManager.Instance.hasWateringCan && _player.GetInteractableObject() is WateringCan) {
             return "Drop Watering Can";
         }
         return null;
@@ -59,6 +56,6 @@ public class WateringCan : MonoBehaviour, IInteractable, IReputable {
     }
 
     public void AlterReputation() {
-        _playerInfo.reputation = (float)Math.Min(10, _playerInfo.reputation + 1.5);
+        InfoManager.Instance.reputation = (float)Math.Min(10, InfoManager.Instance.reputation + 1.5);
     }
 }

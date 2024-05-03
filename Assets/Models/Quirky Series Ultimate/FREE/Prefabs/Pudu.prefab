@@ -487,6 +487,7 @@ GameObject:
   - component: {fileID: 6770766407496367808}
   - component: {fileID: 7099884288975216416}
   - component: {fileID: 590377140728310891}
+  - component: {fileID: 3799228101090197465}
   m_Layer: 0
   m_Name: Pudu
   m_TagString: Untagged
@@ -600,7 +601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029c353e2f837f74c9ef9dd0ad4b0f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInfo: {fileID: 11400000, guid: 520684b725eb83746a6066f05b315279, type: 2}
   state: 0
 --- !u!114 &8082042755767205580
 MonoBehaviour:
@@ -614,7 +614,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0745e125b228cac47ad22c854322ed4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInfo: {fileID: 11400000, guid: 520684b725eb83746a6066f05b315279, type: 2}
   squeakSFX: {fileID: 8300000, guid: 144b50014ef1f0f499e89fbc7b1d8532, type: 3}
 --- !u!136 &4619865834714462736
 CapsuleCollider:
@@ -636,9 +635,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.56
-  m_Height: 1
+  m_Height: 2.35
   m_Direction: 1
-  m_Center: {x: 0, y: 0.44, z: 0}
+  m_Center: {x: 0, y: 1.07, z: 0}
 --- !u!114 &6770766407496367808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,7 +662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0745e125b228cac47ad22c854322ed4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInfo: {fileID: 11400000, guid: 520684b725eb83746a6066f05b315279, type: 2}
   squeakSFX: {fileID: 8300000, guid: 144b50014ef1f0f499e89fbc7b1d8532, type: 3}
 --- !u!65 &590377140728310891
 BoxCollider:
@@ -686,6 +684,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.25, y: 2.09, z: 4.24}
   m_Center: {x: 0, y: 1.02, z: 0}
+--- !u!114 &3799228101090197465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5279811246306103102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0745e125b228cac47ad22c854322ed4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  squeakSFX: {fileID: 8300000, guid: 144b50014ef1f0f499e89fbc7b1d8532, type: 3}
 --- !u!1 &5512041106863543837
 GameObject:
   m_ObjectHideFlags: 0

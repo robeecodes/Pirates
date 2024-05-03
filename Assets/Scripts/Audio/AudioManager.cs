@@ -1,7 +1,4 @@
-// https://www.youtube.com/watch?v=1VXeyeLthdQ
-
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
@@ -43,6 +40,7 @@ public class AudioManager : MonoBehaviour {
         SwapTrack(defaultAmbience);
     }
 
+    // Fade between two tracks
     private IEnumerator FadeTrack(AudioClip newTrack) {
         float timeToFade = 2.0f;
         float timeElapsed = 0f;

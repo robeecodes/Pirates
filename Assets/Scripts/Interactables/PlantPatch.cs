@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 
 public class PlantPatch : MonoBehaviour, IInteractable, IReputable {
-    [SerializeField] private PlayerInfo _playerInfo;
     [SerializeField] private ParticleSystem _destruction;
     [SerializeField] private GameObject _mud;
     [SerializeField] private AudioClip waterSFX;
@@ -18,7 +17,7 @@ public class PlantPatch : MonoBehaviour, IInteractable, IReputable {
     }
 
     public void Interact(Transform interactor, PlayerInteract player) {
-        if (!_playerInfo.hasWateringCan) {
+        if (!InfoManager.Instance.hasWateringCan) {
             AlterReputation();
             StartCoroutine(DestroyPlants());
         }
@@ -50,7 +49,7 @@ public class PlantPatch : MonoBehaviour, IInteractable, IReputable {
     }
 
     public string GetInteractText() {
-        if (!_playerInfo.hasWateringCan) {
+        if (!InfoManager.Instance.hasWateringCan) {
             return "Destroy Plants";
         }
 
@@ -66,12 +65,12 @@ public class PlantPatch : MonoBehaviour, IInteractable, IReputable {
     }
 
     public void AlterReputation() {
-        if (!_playerInfo.hasWateringCan) {
-            _playerInfo.reputation = (float)Math.Max(-10, _playerInfo.reputation - 1.5);
+        if (!InfoManager.Instance.hasWateringCan) {
+            InfoManager.Instance.reputation = (float)Math.Max(-10, InfoManager.Instance.reputation - 1.5);
         }
 
-        if (_playerInfo.hasWateringCan) {
-            _playerInfo.reputation = (float)Math.Min(10, _playerInfo.reputation + 1.5);
+        if (InfoManager.Instance.hasWateringCan) {
+            InfoManager.Instance.reputation = (float)Math.Min(10, InfoManager.Instance.reputation + 1.5);
         }
     }
 }

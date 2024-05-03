@@ -3,6 +3,7 @@ using UnityEngine;
 public class Tavern : MonoBehaviour, IInteractable {
     [SerializeField] private LevelLoader LevelLoader;
     private void EnterTavern() {
+        InfoManager.Instance.isTavernExit = true;
         LevelLoader.LoadLevel("PirateTavern");
     }
 

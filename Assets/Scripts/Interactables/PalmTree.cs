@@ -1,11 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PalmTree : MonoBehaviour, IInteractable, IReputable {
     [SerializeField] private ParticleSystem leaves;
-    [SerializeField] private PlayerInfo _playerInfo;
     
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private AudioClip chopSFX;
@@ -14,7 +11,7 @@ public class PalmTree : MonoBehaviour, IInteractable, IReputable {
     private bool _chopped;
 
     public void Interact(Transform interactor, PlayerInteract player) {
-        if (_chopped || !_playerInfo.hasAxe) {
+        if (_chopped || !InfoManager.Instance.hasAxe) {
             return;
         }
         if (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Chop")) {
@@ -29,7 +26,7 @@ public class PalmTree : MonoBehaviour, IInteractable, IReputable {
     }
 
     public string GetInteractText() {
-        if (_chopped || !_playerInfo.hasAxe) {
+        if (_chopped || !InfoManager.Instance.hasAxe) {
             return null;
         }
 
@@ -41,6 +38,6 @@ public class PalmTree : MonoBehaviour, IInteractable, IReputable {
     }
 
     public void AlterReputation() {
-        _playerInfo.reputation = (float)Math.Max(-10, _playerInfo.reputation - 0.75);
+        InfoManager.Instance.reputation = (float)Math.Max(-10, InfoManager.Instance.reputation - 0.75);
     }
 }

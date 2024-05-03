@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 
 public class Axe : MonoBehaviour, IInteractable {
-    [SerializeField] private PlayerInfo _playerInfo;
     [SerializeField] private PlayerInteract _player;
     
     
@@ -12,16 +11,16 @@ public class Axe : MonoBehaviour, IInteractable {
     [SerializeField] private GameObject hand;
 
     private void Awake() {
-        if (_playerInfo.hasAxe) {
+        if (InfoManager.Instance.hasAxe) {
             Pickup();
         }
     }
 
     public void Interact(Transform interactor, PlayerInteract player) {
         // Pick up the axe if player isn't holding anything
-        if (!_playerInfo.hasAxe && !_playerInfo.hasWateringCan) {
+        if (!InfoManager.Instance.hasAxe && !InfoManager.Instance.hasWateringCan) {
             Pickup();
-        } else if (_playerInfo.hasAxe && player.GetInteractableObject() is Axe) {
+        } else if (InfoManager.Instance.hasAxe && player.GetInteractableObject() is Axe) {
             Drop();   
         }
     }
@@ -34,21 +33,21 @@ public class Axe : MonoBehaviour, IInteractable {
         transform.localPosition = position;
         transform.localRotation = rotation;
         transform.localScale = scale;
-        _playerInfo.hasAxe = true;
+        InfoManager.Instance.hasAxe = true;
         AlterReputation();
     }
 
     private void Drop() {
         transform.parent = null;
         gameObject.AddComponent<Rigidbody>();
-        _playerInfo.hasAxe = false;
+        InfoManager.Instance.hasAxe = false;
     }
     
     public string GetInteractText() {
-        if (!_playerInfo.hasAxe && !_playerInfo.hasWateringCan) {
+        if (!InfoManager.Instance.hasAxe && !InfoManager.Instance.hasWateringCan) {
             return "Pick up Axe";
         }
-        if (_playerInfo.hasAxe && _player.GetInteractableObject() is Axe) {
+        if (InfoManager.Instance.hasAxe && _player.GetInteractableObject() is Axe) {
             return "Drop Axe";
         }
         return null;
@@ -59,6 +58,6 @@ public class Axe : MonoBehaviour, IInteractable {
     }
 
     public void AlterReputation() {
-        _playerInfo.reputation = Math.Max(-10, _playerInfo.reputation - 1);
+        InfoManager.Instance.reputation = Math.Max(-10, InfoManager.Instance.reputation - 1);
     }
 }

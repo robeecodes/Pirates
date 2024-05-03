@@ -4,7 +4,6 @@ using UnityEngine;
 public class Cannon : MonoBehaviour, IInteractable, IReputable {
     [SerializeField] private ParticleSystem explosion;
     [SerializeField] private AudioClip boomSFX;
-    [SerializeField] private PlayerInfo _playerInfo;
     
     private static readonly int Shoot = Animator.StringToHash("Shoot");
 
@@ -32,7 +31,7 @@ public class Cannon : MonoBehaviour, IInteractable, IReputable {
     }
 
     public void AlterReputation() {
-        _playerInfo.reputation = (float)Math.Max(-10, _playerInfo.reputation - 0.25);
+        InfoManager.Instance.reputation = (float)Math.Max(-10, InfoManager.Instance.reputation - 0.25);
     }
 
     private void Bang() {
