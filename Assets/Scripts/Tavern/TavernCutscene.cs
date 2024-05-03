@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 
 public class TavernCutscene : MonoBehaviour {
     [SerializeField] private TavernInfo tavernInfo;
+    [SerializeField] private MainInfo mainInfo;
     [SerializeField] private Dialogue dialogue;
 
     [SerializeField] private GameObject mainCamera;
@@ -17,6 +18,8 @@ public class TavernCutscene : MonoBehaviour {
 
     private void Start() {
         if (!tavernInfo.isCutscenePlayed) {
+            tavernInfo.isCutscenePlayed = true;
+            mainInfo.isTavernExit = true;
             player.GetComponent<ThirdPersonController>().enabled = false;
             mainCamera.SetActive(false);
             cutsceneCamera.SetActive(true);
@@ -25,7 +28,6 @@ public class TavernCutscene : MonoBehaviour {
             _director = GetComponent<PlayableDirector>();
             _director.Play();
             dialogue.Talk();
-            tavernInfo.isCutscenePlayed = true;
         }
         else {
             mainCamera.SetActive(true);
