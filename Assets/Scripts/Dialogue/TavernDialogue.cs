@@ -11,7 +11,7 @@ public class TavernDialogue : Dialogue
     {
         var dialogTexts = new List<DialogData>();
 
-        dialogTexts.Add(new DialogData("Have, you seen, a, uh... A little... guy?/wait:3//close/", "Captain", isSkipable: false));
+        dialogTexts.Add(new DialogData("Have you seen, a, uh... A little... guy?/wait:3//close/", "Captain", isSkipable: false));
         
         dialogTexts.Add(new DialogData("Are you, perhaps, referring to the one other stranger here with a massive head?/wait:1//close/", "Bartender", isSkipable: false));
         

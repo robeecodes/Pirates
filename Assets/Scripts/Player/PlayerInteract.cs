@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using StarterAssets;
 using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour {
@@ -10,19 +8,11 @@ public class PlayerInteract : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E)) {
             IInteractable interactable = GetInteractableObject();
             if (interactable != null) {
-                StartCoroutine(Interact(interactable));
+                interactable.Interact(transform, this);
             }
         }
     }
-
-    IEnumerator Interact(IInteractable interactable) {
-        var controller = GetComponent<ThirdPersonController>();
-        controller.enabled = false;
-        interactable.Interact(transform, this);
-        yield return new WaitForSeconds(1);
-        controller.enabled = true;
-    }
-
+    
     public IInteractable GetInteractableObject() {
         List<IInteractable> interactables = new List<IInteractable>();
         float interactRange = 2f;
@@ -38,6 +28,9 @@ public class PlayerInteract : MonoBehaviour {
             if ((_playerInfo.hasAxe || _playerInfo.hasWateringCan) && interactable is Animal) {
                 continue;
             }
+            if (!_playerInfo.hasAxe && interactable is PalmTree) {
+                continue;
+                }
             if (closestInteractable == null) {
                 closestInteractable = interactable;
             }

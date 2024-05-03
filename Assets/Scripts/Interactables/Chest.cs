@@ -15,7 +15,11 @@ public class Chest : MonoBehaviour, IInteractable
     }
     private void OpenCloseChest() {
         _chestAnimator.SetBool(IsOpen, !_chestAnimator.GetBool(IsOpen));
-        dialogue.Talk();
+        if (!_playerInfo.hasOpenedChest) {
+            dialogue.Talk();
+            _playerInfo.hasOpenedChest = true;
+        }
+        
     }
 
     public void Interact(Transform interactor, PlayerInteract player) {
